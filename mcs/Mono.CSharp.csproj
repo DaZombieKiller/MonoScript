@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{817CE046-07E8-409D-84BF-A6EA4F2879DE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mono.CSharp</RootNamespace>
+    <AssemblyName>Mono.CSharp</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+    <LangVersion>6</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET_4_0</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NET_4_0</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="mcs\anonymous.cs"/>
+    <Compile Include="mcs\argument.cs"/>
+    <Compile Include="mcs\assembly.cs"/>
+    <Compile Include="mcs\assign.cs"/>
+    <Compile Include="mcs\async.cs"/>
+    <Compile Include="mcs\attribute.cs"/>
+    <Compile Include="mcs\cfold.cs"/>
+    <Compile Include="mcs\class.cs"/>
+    <Compile Include="mcs\codegen.cs"/>
+    <Compile Include="mcs\complete.cs"/>
+    <Compile Include="mcs\const.cs"/>
+    <Compile Include="mcs\constant.cs"/>
+    <Compile Include="mcs\context.cs"/>
+    <Compile Include="mcs\convert.cs"/>
+    <Compile Include="mcs\cs-tokenizer.cs"/>
+    <Compile Include="mcs\decl.cs"/>
+    <Compile Include="mcs\delegate.cs"/>
+    <Compile Include="mcs\doc-bootstrap.cs"/>
+    <Compile Include="mcs\doc.cs"/>
+    <Compile Include="mcs\driver.cs"/>
+    <Compile Include="mcs\dynamic.cs"/>
+    <Compile Include="mcs\ecore.cs"/>
+    <Compile Include="mcs\enum.cs"/>
+    <Compile Include="mcs\eval.cs"/>
+    <Compile Include="mcs\expression.cs"/>
+    <Compile Include="mcs\field.cs"/>
+    <Compile Include="mcs\flowanalysis.cs"/>
+    <Compile Include="mcs\generic.cs"/>
+    <Compile Include="mcs\import.cs"/>
+    <Compile Include="mcs\iterators.cs"/>
+    <Compile Include="mcs\lambda.cs"/>
+    <Compile Include="mcs\linq.cs"/>
+    <Compile Include="mcs\literal.cs"/>
+    <Compile Include="mcs\location.cs"/>
+    <Compile Include="mcs\membercache.cs"/>
+    <Compile Include="mcs\method.cs"/>
+    <Compile Include="mcs\modifiers.cs"/>
+    <Compile Include="mcs\namespace.cs"/>
+    <Compile Include="mcs\nullable.cs"/>
+    <Compile Include="mcs\parameter.cs"/>
+    <Compile Include="mcs\pending.cs"/>
+    <Compile Include="mcs\property.cs"/>
+    <Compile Include="mcs\reflection.cs"/>
+    <Compile Include="mcs\report.cs"/>
+    <Compile Include="mcs\settings.cs"/>
+    <Compile Include="mcs\module.cs"/>
+    <Compile Include="mcs\statement.cs"/>
+    <Compile Include="mcs\support.cs"/>
+    <Compile Include="mcs\typemanager.cs"/>
+    <Compile Include="mcs\typespec.cs"/>
+    <Compile Include="mcs\visit.cs"/>
+    <Compile Include="tools\monop\outline.cs"/>
+    <Compile Include="class\Mono.Security\Mono.Security.Cryptography\CryptoConvert.cs"/>
+    <Compile Include="mcs\cs-parser.cs"/>
+    <Compile Include="class\Mono.CompilerServices.SymbolWriter\MonoSymbolFile.cs"/>
+    <Compile Include="class\Mono.CompilerServices.SymbolWriter\MonoSymbolTable.cs"/>
+    <Compile Include="class\Mono.CompilerServices.SymbolWriter\MonoSymbolWriter.cs"/>
+    <Compile Include="class\Mono.CompilerServices.SymbolWriter\SourceMethodBuilder.cs"/>
+    <Compile Include="mcs\tuples.cs"/>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PreBuildEvent>"$(ProjectDir)..\jay\jay" -cvt &lt; "$(ProjectDir)..\jay\skeleton.cs" "$(ProjectDir)mcs\cs-parser.jay" &gt; "$(ProjectDir)mcs\cs-parser.cs"</PreBuildEvent>
+  </PropertyGroup>
+</Project>
