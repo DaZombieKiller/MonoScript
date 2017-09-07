@@ -1,9 +1,10 @@
 ﻿using System;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Collections;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
 
 namespace MonoScript
 {
@@ -53,9 +54,9 @@ namespace MonoScript
             _options.ReferencedAssemblies.Clear();
         }
 
-        public void ImportStandardTypes()
+        public void ImportBuiltinTypes()
         {
-            _compiler.ImportTypes(StandardTypes);
+            _compiler.ImportTypes(BuiltinTypes);
         }
 
         public void ImportNamespace(string name)
@@ -95,41 +96,43 @@ namespace MonoScript
             return new ScriptModule(result.CompiledAssembly);
         }
         
-        private static readonly Type[] StandardTypes =
+        private static readonly Type[] BuiltinTypes =
         {
             typeof(object),
             typeof(ValueType),
             typeof(Attribute),
+
             typeof(int),
-            typeof(uint),
             typeof(long),
+            typeof(uint),
             typeof(ulong),
+            typeof(byte),
+            typeof(sbyte),
+            typeof(short),
+            typeof(ushort),
+
+            typeof(IEnumerator),
+            typeof(IEnumerable),
+            typeof(IDisposable),
+
+            typeof(char),
+            typeof(string),
             typeof(float),
             typeof(double),
-            typeof(char),
-            typeof(short),
             typeof(decimal),
             typeof(bool),
-            typeof(sbyte),
-            typeof(byte),
-            typeof(ushort),
-            typeof(string),
-            typeof(Enum),
-            typeof(Delegate),
-            typeof(MulticastDelegate),
-            typeof(void),
-            typeof(Array),
-            typeof(Type),
-            typeof(System.Collections.IEnumerator),
-            typeof(System.Collections.IEnumerable),
-            typeof(IDisposable),
             typeof(IntPtr),
             typeof(UIntPtr),
+
+            typeof(MulticastDelegate),
+            typeof(Delegate),
+            typeof(Enum),
+            typeof(Array),
+            typeof(void),
+            typeof(Type),
+            typeof(Exception),
             typeof(RuntimeFieldHandle),
             typeof(RuntimeTypeHandle),
-            typeof(Exception),
-            typeof(ParamArrayAttribute),
-            typeof(System.Runtime.InteropServices.OutAttribute),
         };
     }
 }
