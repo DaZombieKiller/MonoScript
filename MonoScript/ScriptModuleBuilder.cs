@@ -5,6 +5,8 @@ using System.Reflection;
 using System.Collections;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace MonoScript
 {
@@ -106,6 +108,11 @@ namespace MonoScript
             typeof(object),
             typeof(ValueType),
             typeof(Attribute),
+            
+            typeof(InAttribute),
+            typeof(OutAttribute),
+            typeof(ExtensionAttribute),
+            typeof(ParamArrayAttribute),
 
             typeof(int),
             typeof(long),
