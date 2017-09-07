@@ -34,6 +34,11 @@ namespace MonoScript
             }
         }
 
+        public void ImportType<T>()
+        {
+            ImportType(typeof(T));
+        }
+
         public void ImportType(Type type)
         {
             _compiler.ImportType(type);

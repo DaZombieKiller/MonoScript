@@ -21,6 +21,7 @@ Using MonoScript is very simple.
 ```CSharp
 using System;
 using MonoScript;
+using System.Runtime.CompilerServices;
 
 namespace MonoScriptDemo
 {
@@ -56,9 +57,10 @@ public class MyClass
 }";
             
             var builder = new ScriptModuleBuilder();
-            builder.ImportStandardTypes();
+            builder.ImportBuiltinTypes();
+            builder.ImportType<ExtensionAttribute>(); // allows extension methods
             builder.ImportNamespace("System");
-            builder.ImportType(typeof(MyStruct));
+            builder.ImportType<MyStruct>();
             builder.AddSource(script);
             var module = builder.Build();
 
