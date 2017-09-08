@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Collections;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -54,10 +55,6 @@ namespace MonoScript
         public void ClearImports()
         {
             _compiler.ClearImports();
-        }
-
-        public void ClearReferences()
-        {
             _options.ReferencedAssemblies.Clear();
         }
 
@@ -73,9 +70,10 @@ namespace MonoScript
                 .Where(t => t.Namespace == name));
         }
 
-        public void ReferenceAssembly(Assembly asm)
+        public void ImportAssembly(Assembly asm)
         {
-            _options.ReferencedAssemblies.Add(asm.Location);
+            if (asm is AssemblyBuilder) ImportTypes(asm.GetTypes());
+            else _options.ReferencedAssemblies.Add(asm.Location);
         }
 
         public ScriptModuleBuilder()
@@ -98,7 +96,6 @@ namespace MonoScript
 
             _sources.Clear();
             ClearImports();
-            ClearReferences();
             
             return new ScriptModule(result.CompiledAssembly);
         }
