@@ -72,8 +72,9 @@ namespace MonoScript
 
         public void ImportAssembly(Assembly asm)
         {
-            if (asm is AssemblyBuilder) ImportTypes(asm.GetTypes());
-            else _options.ReferencedAssemblies.Add(asm.Location);
+            ImportTypes(asm.GetTypes());
+            if (asm.IsDynamic) return;
+            _options.ReferencedAssemblies.Add(asm.Location);
         }
 
         public ScriptModuleBuilder()
