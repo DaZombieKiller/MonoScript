@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Mono.CSharp;
@@ -14,6 +15,12 @@ namespace MonoScript
     {
         private CompilerContext _context;
         private CompilerDriver _driver;
+        private List<Type> _imports;
+
+        public ScriptBuilder()
+        {
+            _imports = new List<Type>();
+        }
 
         public void Start()
         {
@@ -38,6 +45,7 @@ namespace MonoScript
             }, new StreamReportPrinter(error));
 
             _driver = new CompilerDriver(_context);
+            _imports.Clear();
 
             ImportBuiltinTypes();
         }
@@ -87,30 +95,31 @@ namespace MonoScript
             ImportTypes(BuiltinTypes);
         }
 
-        public void ImportTypes(Type[] types)
+        public void ImportTypes(IEnumerable<Type> types)
         {
             ThrowIfNotStarted();
-            _driver.Importer.ImportTypes(types, _driver.Module.GlobalRootNamespace, false);
+            
+            var importableTypes = types
+                .Where(t => !_imports.Contains(t))
+                .Where(t => t.IsPublic)
+                .ToArray();
+            
+            _driver.Importer.ImportTypes(importableTypes, _driver.Module.GlobalRootNamespace, false);
+            _imports.AddRange(importableTypes);
         }
 
         public void ImportNamespace(string name)
         {
             ThrowIfNotStarted();
-            foreach (var type in AppDomain.CurrentDomain.GetAssemblies()
+            ImportTypes(AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(t => t.GetTypes())
-                .Where(t => t.Namespace == name)
-                .Where(t => t.IsPublic))
-            {
-                ImportType(type);
-            }
+                .Where(t => t.Namespace == name));
         }
 
-        public void AddReference(Assembly asm)
+        public void ImportAssembly(Assembly asm)
         {
             ThrowIfNotStarted();
-
-            if (!asm.IsDynamic)
-                _context.Settings.AssemblyReferences.Add(asm.Location);
+            ImportTypes(asm.GetTypes());
         }
 
         public bool Build(out ScriptModule module)
@@ -134,6 +143,7 @@ namespace MonoScript
             {
                 _context = null;
                 _driver = null;
+                _imports.Clear();
             }
         }
 
