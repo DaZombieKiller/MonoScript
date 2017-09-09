@@ -61,7 +61,7 @@ namespace MonoScript
         {
             ThrowIfNotStarted();
             _context.Settings.SourceFiles.Add(
-                new SourceFile(fileName, fileName, _context.Settings.SourceFiles.Count + 1,
+                new SourceFile(fileName, null, _context.Settings.SourceFiles.Count + 1,
                     file => new SeekableStreamReader(
                         new MemoryStream(_context.Settings.Encoding.GetBytes(code)), _context.Settings.Encoding)));
         }
@@ -70,7 +70,7 @@ namespace MonoScript
         {
             ThrowIfNotStarted();
             _context.Settings.SourceFiles.Add(
-                new SourceFile(fileName, fileName, _context.Settings.SourceFiles.Count + 1,
+                new SourceFile(fileName, null, _context.Settings.SourceFiles.Count + 1,
                     file => new SeekableStreamReader(code, _context.Settings.Encoding)));
         }
 
