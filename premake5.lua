@@ -4,22 +4,22 @@ workspace "jay"
 project "jay"
     kind "ConsoleApp"
     language "C"
-    targetdir "jay"
+    targetdir "mcs/jay"
     defines{"SKEL_DIRECTORY=\"\""}
     
     files
     {
-        "jay/closure.c",
-        "jay/error.c",
-        "jay/lalr.c",
-        "jay/lr0.c",
-        "jay/main.c",
-        "jay/mkpar.c",
-        "jay/output.c",
-        "jay/reader.c",
-        "jay/symtab.c",
-        "jay/verbose.c",
-        "jay/warshall.c",
+        "mcs/jay/closure.c",
+        "mcs/jay/error.c",
+        "mcs/jay/lalr.c",
+        "mcs/jay/lr0.c",
+        "mcs/jay/main.c",
+        "mcs/jay/mkpar.c",
+        "mcs/jay/output.c",
+        "mcs/jay/reader.c",
+        "mcs/jay/symtab.c",
+        "mcs/jay/verbose.c",
+        "mcs/jay/warshall.c",
     }
     
     filter "configurations:Debug"
