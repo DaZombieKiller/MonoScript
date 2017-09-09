@@ -5,13 +5,16 @@ namespace MonoScript
 {
     public class ScriptModule
     {
-        public readonly Assembly Assembly;
+        public Assembly Assembly { get; internal set; }
         
-        public Type[] GetTypes() => Assembly.GetTypes();
+        public int ErrorCount { get; internal set; }
+        
+        public int WarningCount { get; internal set; }
+        
+        public Type[] GetTypes() => Assembly?.GetTypes();
 
-        internal ScriptModule(Assembly assembly)
+        internal ScriptModule()
         {
-            Assembly = assembly;
         }
     }
 }

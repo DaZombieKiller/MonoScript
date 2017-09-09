@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InternalsVisibleTo.cs"/>
     <Compile Include="mcs\anonymous.cs"/>
     <Compile Include="mcs\argument.cs"/>
     <Compile Include="mcs\assembly.cs"/>

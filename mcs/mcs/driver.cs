@@ -27,28 +27,13 @@ namespace Mono.CSharp
 	/// <summary>
 	///    The compiler driver.
 	/// </summary>
-	public class Driver
+	class Driver
 	{
 		readonly CompilerContext ctx;
-
-		private readonly List<Type> _imports;
 
 		public Driver (CompilerContext ctx)
 		{
 			this.ctx = ctx;
-			_imports = new List<Type>();
-		}
-
-		public void ImportType(Type t)
-		{
-			if (!_imports.Contains(t))
-				_imports.Add(t);
-		}
-
-		public void ImportTypes(IEnumerable<Type> types)
-		{
-			foreach (var type in types)
-				ImportType(type);
 		}
 
 		Report Report {
@@ -291,16 +276,9 @@ namespace Mono.CSharp
 		//
 		// Main compilation method
 		//
-		public bool Compile()
-		{
-			AssemblyBuilder builder;
-			return Compile(out builder, false);
-		}
-		
-		public bool Compile(out AssemblyBuilder builder, bool generateInMemory)
+		public bool Compile ()
 		{
 			var settings = ctx.Settings;
-			builder = null;
 
 			//
 			// If we are an exe, require a source file for the entry point or
@@ -400,7 +378,6 @@ namespace Mono.CSharp
 
 			var importer = new ReflectionImporter (module, ctx.BuiltinTypes);
 			assembly.Importer = importer;
-			importer.ImportTypes(_imports.ToArray(), module.GlobalRootNamespace, false);
 
 			var loader = new DynamicLoader (importer, ctx);
 			loader.LoadReferences (module);
@@ -408,7 +385,7 @@ namespace Mono.CSharp
 			if (!ctx.BuiltinTypes.CheckDefinitions (module))
 				return false;
 
-			if (!assembly.Create (AppDomain.CurrentDomain, AssemblyBuilderAccess.RunAndSave))
+			if (!assembly.Create (AppDomain.CurrentDomain, AssemblyBuilderAccess.Save))
 				return false;
 
 			module.CreateContainer ();
@@ -458,8 +435,7 @@ namespace Mono.CSharp
 			if (Report.Errors > 0)
 				return false;
 
-			if (!generateInMemory) assembly.Save ();
-			builder = assembly.Builder;
+			assembly.Save ();
 
 #if STATIC
 			references_loader.Dispose ();

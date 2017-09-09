@@ -429,8 +429,7 @@ namespace Mono.CSharp
 		//
 		void CheckReferencesPublicToken ()
 		{
-			//var references = builder_extra.GetReferencedAssemblies ();
-			var references = Builder.GetReferencedAssemblies();
+			var references = builder_extra.GetReferencedAssemblies ();
 			foreach (var an in references) {
 				if (public_key != null && an.GetPublicKey ().Length == 0) {
 					Report.Error (1577, "Referenced assembly `{0}' does not have a strong name",
