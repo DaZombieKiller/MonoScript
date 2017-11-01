@@ -15,11 +15,11 @@ namespace MonoScript
     {
         private CompilerContext _context;
         private CompilerDriver _driver;
-        private List<Type> _imports;
+        private readonly HashSet<Type> _imports;
 
         public ScriptBuilder()
         {
-            _imports = new List<Type>();
+            _imports = new HashSet<Type>();
         }
 
         public void Start()
@@ -104,8 +104,8 @@ namespace MonoScript
                 .Where(t => t.IsPublic)
                 .ToArray();
             
-            _driver.Importer.ImportTypes(importableTypes, _driver.Module.GlobalRootNamespace, false);
-            _imports.AddRange(importableTypes);
+            _driver.Importer.ImportTypes(importableTypes, _driver.Module.GlobalRootNamespace, true);
+            foreach (var t in importableTypes) _imports.Add(t);
         }
 
         public void ImportNamespace(string name)
